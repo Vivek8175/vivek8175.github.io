@@ -11,6 +11,16 @@
     width:70px !important;
     text-align:center;
     }
+
+    button:disabled:hover, input:disabled:hover {
+        cursor: not-allowed;
+        background: #6c757d;
+        color: white !important;
+    }
+
+  
+
+
     .radio-toolbar {
         margin: 10px;
         margin-left:0px;
@@ -216,7 +226,7 @@
                             </div>
                             <div id="" class=" mt-3">
                                 <button class=" g btn btn-secondary  mr-3 color-black" id="Start"><i class="fas fa-play" style="padding:3px 15px"></i></button>
-                                <button class="btn btn-secondary r " id="Stop"><i class="fas fa-stop" style="padding:3px 15px"></i></button>
+                                <button class="btn btn-secondary r " id="Stop" disabled="disabled"><i class="fas fa-stop" style="padding:3px 15px" ></i></button>
 
 
                             </div>
@@ -393,6 +403,7 @@
             $(this).attr("disabled", "disabled");
             $(".controlSection input,.controlSection textarea").attr("disabled", "disabled");
             $(".TIP").removeClass("hide");
+            $("#Stop").removeAttr("disabled");
              timer = setInterval(function () {
                 
                 
@@ -423,6 +434,7 @@
             i = 1;
             $(".colorChange").removeClass("r").addClass("b");
             speechNumber++;
+            $("#Stop").attr("disabled","disabled");
             $("#speakerName").val("");
         });
     </script>
