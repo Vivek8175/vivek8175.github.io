@@ -227,10 +227,10 @@
                             <div id="" class=" mt-3">
                                 <button class=" g btn btn-secondary  mr-3 color-black" id="Start"><i class="fas fa-play" style="padding:3px 15px"></i></button>
                                 <button class="btn btn-secondary r " id="Stop" disabled="disabled"><i class="fas fa-stop" style="padding:3px 15px" ></i></button>
-
+                                <span class="hide TIP">Timer In Progress....</span>
 
                             </div>
-                            <div class="hide TIP">Timer In Progress....</div>
+                            
                         </div>
                         <div class="float-lg-left d-inline-block w30">
                             <div class="headings mt-2 text-center">Word of the Day</div>
@@ -259,6 +259,12 @@
 
         <div class="card mt-3">
             <div class="">
+              
+                <div class="float-left d-inline-block colorChange b w70">
+
+                    &nbsp;
+                    <div class="wod hide" ></div>
+                </div>
                 <div class="float-left d-inline-block captureSpeak w30">
                     <table class="table table-striped overlflow-auto">
                         <thead>
@@ -271,11 +277,6 @@
                         </thead>
                         <tbody id="tbody"></tbody>
                     </table>
-                </div>
-                <div class="float-left d-inline-block colorChange b w70">
-
-                    &nbsp;
-                    <div class="wod hide" ></div>
                 </div>
             </div>
         </div>
