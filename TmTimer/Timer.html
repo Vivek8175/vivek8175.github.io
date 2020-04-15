@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>TM Timer App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<style>
+    .numberBox {
+    width:70px !important;
+    text-align:center;
+    }
+    .radio-toolbar {
+        margin: 10px;
+        margin-left:0px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+        .radio-toolbar input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+        }
+
+    .inline-title {
+        position: absolute;
+        height: 19px;
+        left: 10px;
+        background: white;
+        padding: 0px 5px;
+        top: -8px;
+        font-size: 11px;
+        color: #ff4f4f;
+    }
+
+    .radio-toolbar input[type="radio"]:checked:disabled + label {
+        background-color: #a0a0a0;
+        border-color: #4c4;
+    }
+
+    .radio-toolbar input[type="radio"]:disabled + label {
+        background-color: #a0a0a0;
+    }
+    .inline-head-pos {
+    position:relative;
+    top:-10px;
+    }
+    .btn:hover {
+    background:inherit;
+    color:black;
+    border: 1px solid #a0a0a0;
+    }
+        .radio-toolbar label {
+            display: inline-block;
+            background-color: #e2e2e2;
+            padding: 7px 10px;
+            font-size: 14px;
+            border: 2px solid #a0a0a0;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+    .form-control {
+    font-size: 14px !important;
+    }
+
+            .radio-toolbar label:hover {
+                background-color: #b9b9b9;
+            }
+
+        .radio-toolbar input[type="radio"]:focus + label {
+            border: 2px solid #b9b9b9;
+        }
+
+        .radio-toolbar input[type="radio"]:checked + label {
+            background-color: #dfd;
+            border-color: #4c4;
+        }
+
+    .colorChange {
+        display: block;
+        min-height: 550px;
+    }
+
+    .g {
+        background: lightgreen;
+    }
+
+    .y {
+        background: #ffff6e;
+    }
+
+    .r {
+        background: #ff4f4f;
+    }
+    .b {
+    background:grey;
+    }
+
+    .btn {
+    color:black;
+    }
+
+    .hide {
+    display:none !important;
+    }
+
+    .tmFooter {
+        position: fixed;
+        display: block;
+        top: 96%;
+        width: 100%;
+        text-align: center;
+        background: #343a40;
+        color: white;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .captureSpeak {
+      
+        overflow-y: auto;
+        min-height: 550px;
+        height: 550px;
+    }
+
+    .headings {
+        font-weight: 500;
+        font-size:15px;
+    }
+    @media(min-width:992px) {
+        .w30 {
+            width:30% !important;
+        }
+        .w60 {
+            width: 60% !important;
+        }
+
+        .w70 {
+            width: 70% !important;
+        }
+    }
+
+    @media(max-width:991px) {
+        .w30 {
+            width: 100% !important;
+        }
+
+        .w60 {
+            width: 100% !important;
+        }
+        .w70 {
+            width: 100% !important;
+        }
+    }
+
+    .relative {
+    
+    position:relative;}
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Toastmaster Timer</a>
+    </nav>
+    <div class="container-fluid" style="font-size:14px !important">
+       
+        <div>
+            <div class="">
+                <div class="card p-3 mt-2" style="padding-bottom:0px !important;padding-top:0px !important">
+                    <div  class="row p-3">
+                        <div class="float-lg-left d-inline-block w60">
+                            <div class="controlSection" >
+                                <div class="headings">Speech Type</div>
+                                <div class="radio-toolbar">
+                                    <input type="radio" id="TT" name="Speech" value="Table Topics" data-g="60" data-y="90" data-r="120">
+                                    <label for="TT">Table Topics (1-2 mins)</label>
+                                    <input type="radio" id="Evaluator" name="Speech" value="Evaluation" data-g="120" data-y="150" data-r="180">
+                                    <label for="Evaluator">Evaluation (2-3) mins)</label>
+                                    <input type="radio" id="Prep" name="Speech" value="Prepared Speech" data-g="300" data-y="360" data-r="420">
+                                    <label for="Prep">Prepared Speech (5-7 mins)</label>
+                                    <input type="radio" id="custom" name="Speech" value="Prepared Speech">
+                                    <label for="custom">Custom Speech</label>
+                                    <p class="hide text-danger" id="TypeError">Choose a Speech Type</p>
+                                    <div id="customSection" class="hide mt-2">
+                                        <div class="d-inline-block">
+                                            Green <input type="number" id="cust-g" class="form-control numberBox d-inline-block" />
+                                        </div>
+                                        <div class="d-inline-block  ml-lg-5">
+                                            Yellow <input type="number" id="cust-y" class="form-control numberBox  d-inline-block" />
+                                        </div>
+                                        <div class="d-inline-block  ml-lg-5">
+                                            Red <input type="number" id="cust-r" class="form-control numberBox  d-inline-block" />
+                                        </div>
+                                        <p class="hide text-danger" id="TimeError">All time fields are required</p>
+                                        <p class="hide text-danger" id="MultipleError">Time can only be multiples of 0.5</p>
+                                        <p class="hide text-danger" id="IncrementalError">Time should be incremental</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="controlSection">
+                                <div class="headings mb-2">Speaker Name </div> <input type="text" id="speakerName" class="form-control d-block" style="max-width:660px"  />
+                                <p class="hide text-danger" id="SpeakerError">Speaker Name is required</p>
+                            </div>
+                            <div id="" class=" mt-3">
+                                <button class=" g btn btn-secondary  mr-3 color-black" id="Start"><i class="fas fa-play" style="padding:3px 15px"></i></button>
+                                <button class="btn btn-secondary r " id="Stop"><i class="fas fa-stop" style="padding:3px 15px"></i></button>
+
+
+                            </div>
+                            <div class="hide TIP">Timer In Progress....</div>
+                        </div>
+                        <div class="float-lg-left d-inline-block w30">
+                            <div class="headings mt-2 text-center">Word of the Day</div>
+                            <div class="relative mt-3">
+                                <span class="inline-title">Word Of the Day</span>
+                                <input type="text" class="form-control " id="word" />
+
+                            </div>
+                            <div  class="relative mt-3">
+                                <span class="inline-title">Meaning</span>
+                                <input type="text" class="form-control" id="Meaning" />
+                            </div>
+                            <div  class="relative mt-3">
+                                <span class="inline-title">Usage</span>
+                                <textarea class="form-control "></textarea>
+                            </div>
+                            <div class="controlSection">
+                                <input type="checkbox" id="wod" /> Include Word of the Day in timer card
+                            </div>
+                        </div>
+                    </div>
+                  
+            </div>
+           
+        </div>
+
+        <div class="card mt-3">
+            <div class="">
+                <div class="float-left d-inline-block captureSpeak w30">
+                    <table class="table table-striped overlflow-auto">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Speech Type</th>
+                                <th scope="col">Speaker</th>
+                                <th scope="col">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+                <div class="float-left d-inline-block colorChange b w70">
+
+                    &nbsp;
+                    <div class="wod hide" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+   <div class="tmFooter"> Developed by Vidiya Prasanth Pappannan. All Rights Reserved </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        var i = 1;
+        var speechNumber = 1;
+        var timer;
+
+        $("#wod").on("change", function () {
+            if ($(this).is(":checked"))
+            {
+                $(".wod").html('<div class="text-center" style="padding:220px 0;"><h4> Word of the Day : ' + $("#word").val() + '</h4><p style="font-size:16px">' + $("#Meaning").val() + '</p></div>');
+                $(".wod").removeClass("hide");
+            }
+            else {
+                $(".wod").addClass("hide");
+                $(".wod").html("");
+            }
+        });
+        $('[type="radio"]').on("change", function () {
+            if ($(this).attr("id") == "custom") {
+                $("#customSection").removeClass("hide");
+            }
+            else {
+                $("#customSection").addClass("hide");
+            }
+
+            if ($("#TypeError").is(":visible"))
+            {
+                $("#TypeError").addClass("hide");
+            }
+        });
+
+        $(".numberBox").on("focusout", function () {
+            if ($("#cust-g").val() != "" && $("#cust-y").val() != "" && $("#cust-r").val() != "") {
+           
+                $("#TimeError").addClass("hide");
+            }
+
+            if (parseFloat($("#cust-g").val()) % 0.5 == 0 && parseFloat($("#cust-y").val()) % 0.5 == 0 && parseFloat($("#cust-r").val()) % 0.5 == 0) {
+
+                $("#MultipleError").addClass("hide");
+            }
+            
+        });
+
+        $("#speakerName").on("focusout", function () {
+            if ($(this).val()!="") {
+          
+                $("#SpeakerError").addClass("hide");
+            }
+        });
+        $("#Start").on("click", function () {
+            var Error = false;
+            if (!$('[name="Speech"]').is(":checked"))
+            {
+                $("#TypeError").removeClass("hide");
+                Error = true;
+            
+            }
+            if ($("#speakerName").val()=='' )
+            {
+                $("#SpeakerError").removeClass("hide");
+                Error = Error || true;
+            }
+            if ($('[name="Speech"]:checked').attr("id") == 'custom')
+            {
+                if($("#cust-g").val() == "" || $("#cust-y").val() == "" || $("#cust-r").val() == "") {
+
+                    $("#TimeError").removeClass("hide");
+                    Error = Error || true;
+                }
+
+                else if (parseFloat($("#cust-g").val()) % 0.5 != 0 || parseFloat($("#cust-y").val()) % 0.5 != 0 || parseFloat($("#cust-r").val()) % 0.5 != 0)
+                {
+                    
+                    $("#MultipleError").removeClass("hide");
+                    Error = Error || true;
+                }
+
+                if ((parseFloat($("#cust-y").val()) <= parseFloat($("#cust-g").val())) ||
+                    (parseFloat($("#cust-r").val()) <= parseFloat($("#cust-y").val())) ||
+                    (parseFloat($("#cust-r").val()) <= parseFloat($("#cust-g").val()))
+                )
+                {
+                    $("#IncrementalError").removeClass("hide");
+                    Error = Error || true;
+                }
+
+            }  
+
+            if (Error)
+            {
+                return false;
+            }
+            else { 
+                $("#TypeError").addClass("hide");
+                $("#SpeakerError").addClass("hide");
+                $("#TypeError").addClass("hide");
+                $("#MultipleError").addClass("hide");
+                $("#IncrementalError").addClass("hide");
+            var speech = $('[name="Speech"]:checked');
+            var typeOf = speech.attr("id");
+            var green, yellow, red;
+
+            if (typeOf == "custom") {
+                green = parseFloat($("#cust-g").val())*60;
+                yellow = parseFloat($("#cust-y").val()) * 60;
+                red = parseFloat($("#cust-r").val()) * 60;
+                }
+            
+            else
+            {
+                green = speech.attr("data-g");
+                yellow = speech.attr("data-y");
+                red = speech.attr("data-r");
+            }
+            $(this).attr("disabled", "disabled");
+            $(".controlSection input,.controlSection textarea").attr("disabled", "disabled");
+            $(".TIP").removeClass("hide");
+             timer = setInterval(function () {
+                
+                
+                 if (i == green) {
+                     $(".colorChange").removeClass("b").addClass("g");
+                 }
+                 else if (i == yellow) {
+                     $(".colorChange").removeClass("g").addClass("y");
+                 }
+                 else if (i == red) {
+                     $(".colorChange").removeClass("y").addClass("r");
+                 }
+                 i++;
+            }, 1000);
+
+        }
+        });
+
+        $("#Stop").on("click", function () {
+            var speech = $('[name="Speech"]:checked').val();
+            var timetakenSecds = i-1;
+            $(".controlSection input, .controlSection textarea").removeAttr("disabled");
+            $("#Start").removeAttr("disabled");
+            var myDate = new Date(1000 * timetakenSecds ).toISOString().substr(11, 8);
+            $(".TIP").addClass("hide");
+            clearInterval(timer);
+            $("#tbody").append('<tr><th scope="row">' + speechNumber + '</th><td>' + speech + '</td><td>' + $("#speakerName").val() + '</td><td>' + myDate+'</td></tr >');
+            i = 1;
+            $(".colorChange").removeClass("r").addClass("b");
+            speechNumber++;
+            $("#speakerName").val("");
+        });
+    </script>
+
+
+</body>
+
+</html>
