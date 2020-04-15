@@ -427,7 +427,7 @@
 
             timer = setInterval(function () {
                  var now = new Date();
-                 var diff = parseInt((now - kickoff) / 1000);
+                  diff = parseInt((now - kickoff) / 1000);
                  if (diff == green) {
                      $(".colorChange").removeClass("b").addClass("g");
                  }
@@ -454,7 +454,7 @@
             $(".TIP").addClass("hide");
             clearInterval(timer);
             $("#tbody").append('<tr><th scope="row">' + speechNumber + '</th><td>' + speech + '</td><td>' + $("#speakerName").val() + '</td><td>' + myDate+'</td></tr >');
-            i = 1;
+            diff = 1;
             $(".colorChange").removeClass("r").addClass("b");
             speechNumber++;
             $("#Stop").attr("disabled","disabled");
