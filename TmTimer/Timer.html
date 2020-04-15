@@ -162,6 +162,10 @@
         .w70 {
             width: 70% !important;
         }
+
+        .w40 {
+            width: 40% !important;
+        }
     }
 
     @media(max-width:991px) {
@@ -173,6 +177,10 @@
             width: 100% !important;
         }
         .w70 {
+            width: 100% !important;
+        }
+
+        .w40 {
             width: 100% !important;
         }
     }
@@ -263,12 +271,12 @@
         <div class="card mt-3">
             <div class="">
               
-                <div class="float-left d-inline-block colorChange b w70">
+                <div class="float-left d-inline-block colorChange b w60">
 
                     &nbsp;
                     <div class="wod hide" ></div>
                 </div>
-                <div class="float-left d-inline-block captureSpeak w30">
+                <div class="float-left d-inline-block captureSpeak w40">
                     <table class="table table-striped overlflow-auto">
                         <thead>
                             <tr>
@@ -298,7 +306,7 @@
         $("#wod").on("change", function () {
             if ($(this).is(":checked"))
             {
-                $(".wod").html('<div class="text-center" style="padding:220px 0;"><h4> Word of the Day : ' + $("#word").val() + '</h4><p style="font-size:16px">' + $("#Meaning").val() + '</p></div>');
+                $(".wod").html('<div class="text-center" style="padding:220px 0;"><h3 style="color: white;text-shadow: 1px 1px 1px #272727;"> Word of the Day: ' + $("#word").val() + '</h3><h5 style="font-size:16px">Meaning: ' + $("#Meaning").val() + '</h5></div>');
                 $(".wod").removeClass("hide");
             }
             else {
