@@ -239,7 +239,6 @@
                                 <button class=" g btn btn-secondary  mr-3 color-black" id="Start"><i class="fas fa-play" style="padding:3px 15px"></i></button>
                                 <button class="btn btn-secondary r " id="Stop" disabled="disabled"><i class="fas fa-stop" style="padding:3px 15px" ></i></button>
                                 <span class="hide TIP">Timer In Progress....</span>
-
                             </div>
                             
                         </div>
@@ -299,7 +298,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
-        var i = 1;
+        var diff = 1;
         var speechNumber = 1;
         var timer;
 
@@ -416,19 +415,31 @@
             $(".controlSection input,.controlSection textarea").attr("disabled", "disabled");
             $(".TIP").removeClass("hide");
             $("#Stop").removeAttr("disabled");
-             timer = setInterval(function () {
-                
-                
-                 if (i == green) {
+
+
+            var kickoff = new Date();
+            
+      
+
+
+
+           
+
+            timer = setInterval(function () {
+                 var now = new Date();
+                 var diff = parseInt((now - kickoff) / 1000);
+                 if (diff == green) {
                      $(".colorChange").removeClass("b").addClass("g");
                  }
-                 else if (i == yellow) {
+                 else if (diff == yellow) {
                      $(".colorChange").removeClass("g").addClass("y");
                  }
-                 else if (i == red) {
+                 else if (diff == red) {
                      $(".colorChange").removeClass("y").addClass("r");
                  }
-                 i++;
+                
+                 
+
             }, 1000);
 
         }
@@ -436,7 +447,7 @@
 
         $("#Stop").on("click", function () {
             var speech = $('[name="Speech"]:checked').val();
-            var timetakenSecds = i-1;
+            var timetakenSecds = diff - 1;
             $(".controlSection input, .controlSection textarea").removeAttr("disabled");
             $("#Start").removeAttr("disabled");
             var myDate = new Date(1000 * timetakenSecds ).toISOString().substr(11, 8);
