@@ -570,7 +570,14 @@
 
         }
         });
-
+        $("#hideTimer").on("change", function () {
+            if ($(this).is(":checked")) {
+                $(".timerDisplay").html("");
+            }
+            else {
+                $(".timerDisplay").html("00:00");
+            }
+        });
         $("#Stop").on("click", function () {
             
             var timetakenSecds = diff ;
@@ -585,7 +592,12 @@
             speechNumber++;
             $("#Stop").attr("disabled","disabled");
             $("#speakerName").val("");
-            $(".timerDisplay").html("00:00");
+            if ($("#hideTimer").is(":checked")) {
+                $(".timerDisplay").html("");
+            }
+            else {
+                $(".timerDisplay").html("00:00");
+            }
         });
     </script>
 
