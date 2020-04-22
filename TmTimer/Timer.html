@@ -654,7 +654,7 @@
             clearInterval(timer);
             $("#tbody").append('<tr><th scope="row">' + speechNumber + '</th><td>' + speechName + '</td><td>' + $("#speakerName").val() + '</td><td><i class="fas fa-stopwatch ' + cardColor + '" style="font-size: 20px;"></i>  ' + myDate + '</td></tr >');
             diff = 1;
-            $(".colorChange").removeClass("r").addClass("b");
+            $(".colorChange").removeClass("r").removeClass("g").removeClass("y").addClass("b");
             speechNumber++;
             $("#Stop").attr("disabled", "disabled");
             $(".colorChange").removeClass("fullScreen");
