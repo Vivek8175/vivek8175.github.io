@@ -5,3 +5,5 @@
 <p>The application has options to choose speech type, enable or disable timer clock etc. </p>
 <p>This app also comes with Word of the Day display so that your speakers don't forget to use word of the day in their speeches.</p>
 
+![](Images/TmTimer1.png)
+![](Images/TmTimer2.png)
